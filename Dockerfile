@@ -15,7 +15,8 @@ RUN npm install ibm_db
 # RUN apt-get install -y gnupg2
 # RUN apt-get install -y wget
 # RUN apt-get install -y locales
-RUN apt-get install -y numactl gnupg2 wget locales
+#RUN apt-get install -y numactl gnupg2 wget locales
+RUN apt-get update && apt-get install -y numactl gnupg2 wget locales
 
 # Ensure that we always use UTF-8 and with GB English locale, as the Python scripts had coding issues
 RUN locale-gen en_GB.UTF-8
