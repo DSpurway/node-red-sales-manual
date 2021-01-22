@@ -1,12 +1,14 @@
 FROM cunlifs/ubuntu:v0.5
 
-COPY sales_manual_finder.py /usr/src/node-red/sales_manual_finder.py
-COPY sales_manual_product_lifecycle_extractor.py /usr/src/node-red/sales_manual_product_lifecycle_extractor.py
-COPY sales-manual-reader-flow.json /usr/src/node-red/sales-manual-reader-flow.json
-COPY package.json /usr/src/node-red/package.json
+#COPY sales_manual_finder.py /usr/src/node-red/sales_manual_finder.py
+#COPY sales_manual_product_lifecycle_extractor.py /usr/src/node-red/sales_manual_product_lifecycle_extractor.py
+#COPY sales-manual-reader-flow.json /usr/src/node-red/sales-manual-reader-flow.json
+#COPY package.json /usr/src/node-red/package.json
 
-ENV http_proxy http://9.196.156.29:3128
-ENV https_proxy http://9.196.156.29:3128
+COPY bond-film-flow.json /usr/src/node-red/bond-film-flow.json
+
+#ENV http_proxy http://9.196.156.29:3128
+#ENV https_proxy http://9.196.156.29:3128
 
 # Db2 client support
 RUN npm install ibm_db
@@ -25,9 +27,11 @@ RUN echo "deb http://public.dhe.ibm.com/software/server/POWER/Linux/xl-compiler/
 RUN apt-get update
 RUN apt-get install -y xlc.16.1.1
 
-EXPOSE 1880/tcp
-RUN chmod 750 /usr/src/node-red/sales-manual-reader-flow.json
-##RUN chown -R node-red:node-red /usr/src/node-red
+#EXPOSE 1880/tcp
+
+RUN chmod 750 /usr/src/node-red/bond-film-flow.json
+#RUN chmod 750 /usr/src/node-red/sales-manual-reader-flow.json
+#RUN chown -R node-red:node-red /usr/src/node-red
 RUN chmod 777 /usr/src/node-red
 
 RUN python3 -m venv /usr/src/node-red/venv --system-site-packages
@@ -39,4 +43,5 @@ ENV HOME /usr/src/node-red
 WORKDIR /usr/src/node-red
 #CMD sleep 60000
 #CMD node-red /usr/src/node-red/sales-manual-reader-flow.json
-CMD node-red
+CMD node-red /usr/src/node-red/bond-film-flow.json
+#CMD node-red
