@@ -7,8 +7,8 @@ FROM cunlifs/ubuntu:v0.5
 
 COPY bond-film-flow.json /usr/src/node-red/bond-film-flow.json
 
-#ENV http_proxy http://9.196.156.29:3128
-#ENV https_proxy http://9.196.156.29:3128
+ENV http_proxy http://9.196.156.29:3128
+ENV https_proxy http://9.196.156.29:3128
 
 # Db2 client support
 RUN npm install ibm_db
